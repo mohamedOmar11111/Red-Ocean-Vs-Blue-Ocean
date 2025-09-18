@@ -1,0 +1,174 @@
+        :root {
+            --bg-color: #0d1117;
+            --primary-text: #f0f6fc;
+            --secondary-text: #b1b6bc;
+            --red-ocean: #e53935;
+            --blue-ocean: #1e88e5;
+            --solution-green: #43a047;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --glow-blue: 0 0 20px rgba(30, 136, 229, 0.6);
+            --glow-red: 0 0 20px rgba(229, 57, 53, 0.6);
+            --glow-green: 0 0 20px rgba(67, 160, 71, 0.6);
+        }
+
+        @keyframes subtle-bg {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 10% 10%; }
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-text);
+            direction: rtl;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 1px 1px, var(--border-color) 1px, transparent 0);
+            background-size: 30px 30px;
+            animation: subtle-bg 20s linear infinite;
+        }
+        
+        .container { max-width: 1000px; }
+
+        .animated-gradient-text {
+            background: linear-gradient(45deg, #2196F3, #4CAF50, #FFC107);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-animation 5s ease infinite;
+        }
+
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .rule-card {
+            transition: all 0.3s ease;
+            border-color: var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .rule-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--blue-ocean);
+        }
+
+        .rule-card.active {
+            transform: translateY(-5px);
+            box-shadow: var(--glow-blue);
+            border-color: var(--blue-ocean);
+        }
+        
+        .rule-header {
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .rule-header:hover { background-color: #2c313a; }
+
+        .rule-card.active .rule-header {
+            background: linear-gradient(to right, rgba(30, 136, 229, 0.15), rgba(30, 136, 229, 0.02));
+        }
+
+        .rule-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease-in-out, opacity 0.4s ease-in-out, padding 0.6s ease-in-out;
+            opacity: 0;
+            padding-left: 1.5rem; padding-right: 1.5rem;
+        }
+        
+        .rule-card.active .rule-content {
+            max-height: 500px;
+            opacity: 1;
+            padding-bottom: 1.5rem;
+        }
+        
+        .arrow { transition: transform 0.3s ease; }
+        
+        .rule-card.active .arrow { transform: rotate(90deg); }
+
+        .ocean {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .ocean-blue { background: linear-gradient(to top, #1e88e5, #42a5f5); }
+        .ocean-red { background: linear-gradient(to top, #e53935, #ef5350); }
+
+        .wave {
+            position: absolute;
+            bottom: 0; left: -100px; right: -100px;
+            height: 50px;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3e%3cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' class='shape-fill' fill='white' fill-opacity='0.1'%3e%3c/path%3e%3c/svg%3e");
+            background-size: 100% 100%;
+            animation: wave-animation 15s linear infinite;
+        }
+        .wave.wave2 { animation-delay: -5s; animation-duration: 20s; opacity: 0.5; }
+        .wave.wave3 { animation-delay: -10s; animation-duration: 25s; opacity: 0.3; }
+
+        @keyframes wave-animation {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .competitor {
+            position: absolute;
+            border-radius: 50%;
+        }
+        
+        @keyframes move-dot-red {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.7; }
+            25% { transform: translate(50px, -20px) scale(0.8); opacity: 0.5; }
+            50% { transform: translate(-30px, 30px) scale(1.2); opacity: 0.9; }
+            75% { transform: translate(20px, -40px) scale(0.9); opacity: 0.6; }
+        }
+
+        @keyframes move-dot-blue {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(20px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        .mindset-card {
+            @apply flex flex-col p-6 rounded-xl transition-all duration-300;
+            transform-style: preserve-3d;
+        }
+        .mindset-card:hover {
+            transform: perspective(1000px) translateY(-10px) rotateX(5deg) scale(1.05);
+            box-shadow: 0 25px 40px rgba(0,0,0,0.3);
+        }
+        .mindset-card.old {
+            @apply bg-red-800/50 border border-red-700;
+        }
+        .mindset-card.old:hover { box-shadow: var(--glow-red); }
+
+        .mindset-card.new {
+            @apply bg-green-800/50 border border-green-700;
+        }
+        .mindset-card.new:hover { box-shadow: var(--glow-green); }
+
+        .review-list li {
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+        .review-list li:hover {
+            transform: translateX(5px);
+            color: white;
+        }
+
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
